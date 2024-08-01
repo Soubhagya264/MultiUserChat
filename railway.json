@@ -1,0 +1,48 @@
+{
+    "services": {
+      "frontend": {
+        "build": {
+          "context": "./apps/frontend",
+          "dockerfile": "Dockerfile"
+        },
+        "env": {
+          "NODE_ENV": "production"
+        }
+      },
+      "backend": {
+        "build": {
+          "context": "./apps/backend",
+          "dockerfile": "Dockerfile"
+        },
+        "env": {
+          "NODE_ENV": "production",
+          "DATABASE_URL": "postgresql://Soubhagya:123@postgres:5432/chatapp?schema=public",
+          "REFRESH_TOKEN_SECRET": "mysecret",
+          "ACCESS_TOKEN_SECRET": "mysecret",
+          "APP_URL": "http://backend:4000",
+          "IMAGE_PATH": "/images",
+          "REDIS_URL": "redis://redis:6379"
+        }
+      },
+      "postgres": {
+        "image": "postgres:10",
+        "container_name": "my_postgres_container1",
+        "env": {
+          "POSTGRES_USER": "Soubhagya",
+          "POSTGRES_PASSWORD": "123",
+          "POSTGRES_DB": "chatapp"
+        },
+        "volumes": [
+          "my_postgres_data:/var/lib/postgresql/data"
+        ]
+      },
+      "redis": {
+        "image": "redis:latest",
+        "env": {}
+      }
+    },
+    "volumes": {
+      "my_postgres_data": {}
+    }
+  }
+  

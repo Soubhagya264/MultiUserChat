@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"  # Example port for backend, adjust as necessary
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: "postgresql://Soubhagya:123@postgres:5432/chatapp?schema=public"
+      REFRESH_TOKEN_SECRET: "mysecret"
+    depends_on:
+      - redis
+      - postgres
+
+  postgres:
+    image: postgres:10
+    container_name: my_postgres_container1
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: Soubhagya
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: chatapp
+    volumes:
+      - my_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+volumes:
+  my_postgres_data:

@@ -1,0 +1,32 @@
+{
+  "name": "my-chat-app-",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "start": "docker-compose -f docker-compose.yml up",
+    "stop": "docker-compose -f docker-compose.yml down",
+    "restart": "docker-compose -f docker-compose.yml restart",
+    "logs": "docker-compose -f docker-compose.yml logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.6",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@9.6.7",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "graphql-upload": "^14.0.0"
+  }
+}
