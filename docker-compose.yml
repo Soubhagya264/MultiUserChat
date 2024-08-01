@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
     depends_on:
       - backend
 
@@ -17,11 +17,15 @@ services:
       context: ./apps/backend
       dockerfile: Dockerfile
     ports:
-      - "4000:4000"  # Example port for backend, adjust as necessary
+      - "4000:4000"
     environment:
-      NODE_ENV: development
-      DATABASE_URL: "postgresql://Soubhagya:123@postgres:5432/chatapp?schema=public"
-      REFRESH_TOKEN_SECRET: "mysecret"
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      APP_URL: ${APP_URL}
+      IMAGE_PATH: ${IMAGE_PATH}
+      REDIS_URL: ${REDIS_URL}
     depends_on:
       - redis
       - postgres
@@ -32,9 +36,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: Soubhagya
-      POSTGRES_PASSWORD: 123
-      POSTGRES_DB: chatapp
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - my_postgres_data:/var/lib/postgresql/data
 

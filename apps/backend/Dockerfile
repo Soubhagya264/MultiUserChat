@@ -12,9 +12,7 @@ RUN npm install -g npm@10.8.2
 # Install NestJS dependencies
 RUN npm install
 
-# Run Prisma migrations
-RUN npx prisma generate
-RUN npx prisma migrate deploy
+
 
 # Copy the rest of your application code to the working directory
 COPY . .
